@@ -14,15 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-class data{
-    constructor(){
-    this.baseURL= "https://sonder.com";
-
+class data {
+  constructor() {
+    this.baseURL = "https://sonder.com";
+  }
 }
-}
-module.exports=new data();
+module.exports = new data();
