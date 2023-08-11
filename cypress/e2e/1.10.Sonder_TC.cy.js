@@ -93,5 +93,5 @@ describe('1.10 "Sonder Pulse" section of homepage', () => {
 
   })
 
-   
+     
 })

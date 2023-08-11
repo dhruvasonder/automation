@@ -92,11 +92,109 @@ describe('1.11 Footer section on the homepage.', () => {
     cy.get('footer section div p').eq(13).should('contain','Social')
 
     cy.get('footer section div p').eq(13).next()
-    .find('[class="sr-only"]').should('contain','facebook')
+    .find('[class="sr-only"]').eq(0).should('contain','facebook')
 
-    cy.get('footer section div p').eq(13).next().next()
+    
+    cy.xpath("(//span[contains(text(),'facebook')])[2]")
+    .next()
     .should('have.attr','src','https://images.sonder.com/image/upload/v1566408331/catalina/icons/facebook.svg')
 
+    cy.get('footer section div p').eq(13).next()
+    .find('[class="sr-only"]').eq(1).should('contain','instagram')
+
+    cy.xpath("(//span[contains(text(),'instagram')])[2]")
+    .next()
+    .should('have.attr','src','https://images.sonder.com/image/upload/v1566408397/catalina/icons/insta.svg')
+
+    cy.get('footer section div p').eq(13).next()
+    .find('[class="sr-only"]').eq(2).should('contain','twitter')
+
+    cy.xpath("(//span[contains(text(),'twitter')])[2]")
+    .next()
+    .should('have.attr','src','https://images.sonder.com/image/upload/v1566408432/catalina/icons/twitter.svg')
+
   })
-     
+
+  it('should verify language text and its options in the footer',()=>{
+    cy.get('[for="language-select-desktop"]')
+    .contains('Language')
+    .should('be.visible')
+
+    cy.get('#language-select-desktop')
+  .find('option')
+  .then(($options) => {
+    const expectedLanguages = [
+      'English (US)',
+      'English (CA)',
+      'English (GB)',
+      'Français (FR)',
+      'Français (CA)',
+      'Español (ES)',
+      'Español (MX)',
+      'Italiano (IT)'
+    ];
+
+    // Make sure the number of options matches the expected number of languages
+    expect($options).to.have.length(expectedLanguages.length);
+
+    // Loop through each option and verify its text against the expected language text
+    $options.each((index, option) => {
+      const text = Cypress.$(option).text().trim(); // Get the text of the option and remove any leading/trailing spaces
+      const expectedLanguage = expectedLanguages[index];
+      expect(text).to.equal(expectedLanguage); // Verify the option's text against the expected language text
+    });
+  });
+
+
+  it('should verify currency and its options',()=>{
+    cy.get('[for="currency-select-desktop"]')
+    .contains('Currency')
+    .should('be.visible')
+
+    cy.get('#currency-select-desktop')
+  .find('option')
+  .then(($options) => {
+    const expectedCurrencies = [
+      'USD ($)',
+      'CAD ($)',
+      'EUR (€)',
+      'GBP (£)',
+      'AED (د.إ)',
+      'MXN ($)'
+    ];
+
+    // Make sure the number of options matches the expected number of currencies
+    expect($options).to.have.length(expectedCurrencies.length);
+
+    // Loop through each option and verify its text against the expected currency
+    $options.each((index, option) => {
+      const text = Cypress.$(option).text().trim(); // Get the text of the option and remove any leading/trailing spaces
+      const expectedCurrency = expectedCurrencies[index];
+      expect(text).to.equal(expectedCurrency); // Verify the option's text against the expected currency
+        });
+     });
+
+   })
+
+  })
+
+  it('Verify copyright text , phone , terms and privavy policy',()=>{
+    cy.get('.Footer_legal__pOY5I').within(() => {
+      cy.contains('Ⓒ 2023 Sonder Holdings Inc. All rights reserved.')
+        .should('be.visible');
+    
+      cy.contains('+1 617-300-0956')
+        .should('be.visible');
+    
+      cy.contains('Terms of Service')
+        .should('be.visible')
+        .and('have.attr', 'href', '/terms-of-service');
+    
+      cy.contains('Privacy Policy')
+        .should('be.visible')
+        .and('have.attr', 'href', '/privacy-policy');
+    });
+    
+  })
+    
 })
