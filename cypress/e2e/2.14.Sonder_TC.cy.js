@@ -25,44 +25,11 @@ describe('2.14 Functionality of "Sign Up" link using Google Oauth in the homepag
   })
 
   
-  it('should verify the sign up page functionality',()=>{
-    const randomEmail = generateRandomEmail();
-    const password= "Qwerty@123";
-
-    cy.get('#email')
-    .type(randomEmail)
+  it('should sign up in Google Oauth functionality',()=>{
 
     cy.get('button')
-    .contains('Continue')
-    .click()
-
-    cy.wait(2000)
-
-    cy.get('#emailConfirmation')
-    .type(randomEmail)
-
-    cy.get('#password')
-    .type(password)
-
-    cy.get('#firstName')
-    .type('Dhruva')
-
-    cy.get('#lastName')
-    .type('pathak')
-   
-    cy.get('button[type="submit"]')
-    .click()
-
+    .contains('Google').click()
     
-
-  })
-  it('just log out',()=>{
-    cy.get('[class="Dropdown_dropdown_indicator__QvjQL"]')
-    .click()
-
-    cy.get('p')
-    .contains('Log Out')
-    .click()
   })
   
 }) 

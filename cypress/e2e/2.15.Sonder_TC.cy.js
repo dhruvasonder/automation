@@ -5,8 +5,7 @@ import '../support/commands'
 import 'cypress-xpath';
 
 
-
-describe('2.10 Functionality of the "Log In" link in the menu using Linkedln Oauth', () => {
+describe('2.15 Functionality of "Sign Up" link using FB Oauth in the homepage menu', () => {
 
   before(()=>{
     cy.fixture('Sonder').then(function(data){   
@@ -16,18 +15,21 @@ describe('2.10 Functionality of the "Log In" link in the menu using Linkedln Oau
     })  
   })
 
-  it('LinkedLn oauth login',()=>{
+  it('Click on the "Sign up" link in the pop-up. ',()=>{
 
     cy.get('.ActionsContainer_actions-container-row__yvXHx')
     .find('p')
-    .contains('Log in')
+    .contains('Sign up')
     .click()
-
-    cy.get('span')
-   .contains('Log in with linkedLn')
-   .click()
 
   })
 
+  
+  it('should sign up in FB Oauth functionality',()=>{
+
+    cy.get('button')
+    .contains('Facebook').click()
+    
+  })
   
 }) 

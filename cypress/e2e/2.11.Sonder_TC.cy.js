@@ -28,6 +28,5 @@ describe('2.11 Functionality of the "Log In" link in the menu using Apple Oauth'
    .click()
 
   })
-
   
 }) 

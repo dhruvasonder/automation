@@ -140,12 +140,6 @@ describe('2.7 "Log In" link in the menu using username/password', () => {
     cy.get('button')
     .contains('close')
     .should('exist')
-
-    cy.get('button')
-    .contains('close')
-    .click()
-
-
   })
 
   
