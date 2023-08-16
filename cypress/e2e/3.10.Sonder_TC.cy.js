@@ -5,7 +5,7 @@ import '../support/commands'
 import 'cypress-xpath';
 
 
-describe('3.8 Check-in and Check-out date format ', () => {
+describe('3.10 Behavior of search button when clicked without selecting a city or check-in and check-out date, and guest information.', () => {
 
   before(()=>{
     cy.fixture('Sonder').then(function(data){   
@@ -16,9 +16,9 @@ describe('3.8 Check-in and Check-out date format ', () => {
   })
   
 
-  it('should verify check in and check out date format ',()=>{
+it('Behavior of search button clicked without selecting a city',()=>{
 
-    cy.get('.DateRangePickerInput_input__UEZC_').eq(0)
+  cy.get('.DateRangePickerInput_input__UEZC_').eq(0)
     .should('exist')
     .click()
 
@@ -34,18 +34,12 @@ describe('3.8 Check-in and Check-out date format ', () => {
     .click()
 
     cy.wait(1000)
-    cy.get('[name="startDate"]')
-    .invoke('val')
-    .then((value) => {   
-        expect(value).to.match(/^\w+, \w+ \d+$/);
-    });
-
-
-    cy.get('[name="endDate"]')
-    .invoke('val')
-    .then((value) => {   
-        expect(value).to.match(/^\w+, \w+ \d+$/);
-    });
-
+    
+  cy.get('[aria-label="Increment guest counter"]').click();
+  cy.get('button').contains('Search').click();
+  cy.url().should('eq', 'https://www.sonder.com/');
+  
   })
+
+
 }) 
